@@ -14,3 +14,18 @@ def faultHandler(func):
             return False;
 
     return wrapper;
+
+def faultReturnHandler(func):
+    """
+        Handles functions with return.
+        Decorated function returns erro message if something went wrong.
+    """
+    def wrapper(*args, **kwargs):
+
+        try:
+            return func(*args, **kwargs);
+
+        except Exception as error_message:
+            return "Fault: {}".format(error_message);
+
+    return wrapper;
