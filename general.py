@@ -1,8 +1,11 @@
+from functools import wraps;
+
 def faultHandler(func):
     """
         Handles functions with no return.
         Decorated function returns True if function executed successfully, False if something went wrong.
     """
+    @wraps(func)
     def wrapper(*args, **kwargs):
 
         try:
@@ -20,6 +23,7 @@ def faultReturnHandler(func):
         Handles functions with return.
         Decorated function returns erro message if something went wrong.
     """
+    @wraps(func)
     def wrapper(*args, **kwargs):
 
         try:
