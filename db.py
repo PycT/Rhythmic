@@ -20,7 +20,11 @@ class SQLiteDB:
 
         self.cursor.executescript(sql_script);
 
-        return self.cursor.fetchall();
+        if (not self.cursor.lastrowid):
+            return self.cursor.lastrowid;
+            
+        else:
+            return self.cursor.fetchall();
 
     def __enter__(self):
 
