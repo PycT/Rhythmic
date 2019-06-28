@@ -13,14 +13,18 @@ class SQLiteDB:
 
         self.cursor.execute(sql_request);
 
-        return self.cursor.fetchall();
+        if (self.cursor.lastrowid):
+            return self.cursor.lastrowid;
+            
+        else:
+            return self.cursor.fetchall();
 
     def runScript(self, sql_script):
         """ Execute a script passed as a byte- or unicode string """
 
         self.cursor.executescript(sql_script);
 
-        if (not self.cursor.lastrowid):
+        if (self.cursor.lastrowid):
             return self.cursor.lastrowid;
             
         else:
