@@ -1,5 +1,15 @@
 import sqlite3;
 
+def rhythmicDB(db_name = "SQLite", *args, **kwargs):
+    """
+    DB handlers factory
+    """
+    if db_name == "SQLite":
+        return SQLiteDB(*args, **kwargs);
+    else:
+        return None;
+
+
 class SQLiteDB:
     """ A class to handle SQLite3 database """
 
