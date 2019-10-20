@@ -1,2 +1,2 @@
-from .db import rhythmicDB;
+from .db import rhythmicDB, insertQueryFromDict;
 from .general import faultHandler, faultReturnHandler;

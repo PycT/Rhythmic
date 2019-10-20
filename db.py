@@ -9,6 +9,21 @@ def rhythmicDB(db_name = "SQLite", *args, **kwargs):
     else:
         return None;
 
+def insertQueryFromDict(the_dict):
+
+    column_names = the_dict.keys();
+    column_names_string = ", ".join(column_names);
+
+    values_to_insert_string = "";
+
+    for parameter in column_names:
+        values_to_insert_string += "'{}', ".format(the_dict[parameter]);
+
+    values_to_insert = values_to_insert_string[:-2];
+
+    the_query = "INSERT INTO valves_table ({}) VALUES ({});".format(column_names_string, values_to_insert);
+
+    return the_query;
 
 class SQLiteDB:
     """ A class to handle SQLite3 database """
