@@ -9,7 +9,7 @@ def rhythmicDB(db_name = "SQLite", *args, **kwargs):
     else:
         return None;
 
-def insertQueryFromDict(the_dict):
+def insertQueryFromDict(table_name, the_dict):
 
     column_names = the_dict.keys();
     column_names_string = ", ".join(column_names);
@@ -21,7 +21,7 @@ def insertQueryFromDict(the_dict):
 
     values_to_insert = values_to_insert_string[:-2];
 
-    the_query = "INSERT INTO valves_table ({}) VALUES ({});".format(column_names_string, values_to_insert);
+    the_query = "INSERT INTO {} ({}) VALUES ({});".format(table_name, column_names_string, values_to_insert);
 
     return the_query;
 
