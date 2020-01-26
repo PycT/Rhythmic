@@ -58,8 +58,8 @@ class Logger:
         the_day = the_timestamp[:10];
         if the_day != self.the_day:
             self.initLogFile();
-            
-        log_string = "{}: {} \n".\
+
+        log_string = "{}: {} \n\n".\
         format(
                     self.timeStamp(),
                     message_string
