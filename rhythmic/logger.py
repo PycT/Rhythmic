@@ -3,22 +3,42 @@ from os.path import isfile as isFile;
 
 class Logger:
 
-    def __init__(self, log_filename_postfix = "log", log_filename_extention = "log", path_to_log = "."):
-        the_day = self.timeStamp()[:10];
+    def __init__(self, log_filename_postfix = "log", log_filename_extension = "log", path_to_log = "."):
+
+        self.log_filename_postfix = log_filename_postfix;
+        self.log_filename_extension = log_filename_extension;
+        self.path_to_log = path_to_log;
+        self.initLogFile();
+
+        return None;
+
+    def initLogFile(self, log_filename_postfix = None, \
+                                 log_filename_extension = None, \
+                                 path_to_log = None):
+        """ PRIVATE """
+
+        if not log_filename_postfix:
+            log_filename_postfix = self.log_filename_postfix;
+
+        if not log_filename_extension:
+            log_filename_extension = self.log_filename_extension;
+
+        if not path_to_log:
+            path_to_log = self.path_to_log;
+
+        self.the_day = self.timeStamp()[:10];
         self.log_file_name = "{}/{}_{}.{}".\
         format(
                     path_to_log,
-                    the_day,
+                    self.the_day,
                     log_filename_postfix,
-                    log_filename_extention
+                    log_filename_extension
                   );
         if not isFile(self.log_file_name):
             self.writeDown("The log file created. \n ----------------------------------------------- \n\n");
 
-        return None;
-
     def timeStamp(self, digits_after_dot = 2):
-
+        """ PRIVATE """
         full_string_of_time_stamp = str(datetime.now());
 
         if digits_after_dot >= 6:
@@ -34,6 +54,11 @@ class Logger:
 
     def writeDown(self, message_string):
 
+        the_timestamp = self.timeStamp();
+        the_day = the_timestamp[:10];
+        if the_day != self.the_day:
+            self.initLogFile();
+            
         log_string = "{}: {} \n".\
         format(
                     self.timeStamp(),
